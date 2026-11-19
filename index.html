@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Definitely Not Hacking 😂</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(-45deg,
+        #667eea, #764ba2, #f093fb, #4facfe);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,.12);
+    animation: float 12s infinite ease-in-out;
+}
+
+.bubble:nth-child(1) {
+    width: 180px;
+    height: 180px;
+    top: 10%;
+    left: 10%;
+}
+
+.bubble:nth-child(2) {
+    width: 100px;
+    height: 100px;
+    bottom: 10%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.bubble:nth-child(3) {
+    width: 70px;
+    height: 70px;
+    top: 70%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    50% {transform: translateY(-60px) rotate(180deg);}
+}
+
+.login-card {
+    position: relative;
+    width: 370px;
+    padding: 35px;
+    background: rgba(255,255,255,.16);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 25px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.2);
+    text-align: center;
+    z-index: 2;
+    animation: appear .8s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.mascot {
+    font-size: 65px;
+    margin-bottom: 5px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    50% {transform: translateY(-12px);}
+}
+
+.eyes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto 12px;
+}
+
+.eye {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.pupil {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #222;
+    transition: .08s;
+}
+
+h1 {
+    color: white;
+    font-size: 27px;
+    margin-bottom: 7px;
+}
+
+.subtitle {
+    color: rgba(255,255,255,.85);
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 17px;
+}
+
+label {
+    color: white;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 12px;
+    background: rgba(255,255,255,.2);
+    color: white;
+    outline: none;
+    font-size: 14px;
+    transition: .3s;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,.7);
+}
+
+input:focus {
+    background: rgba(255,255,255,.3);
+    border-color: white;
+    box-shadow: 0 0 15px rgba(255,255,255,.3);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    color: #764ba2;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+#message {
+    min-height: 25px;
+    margin-top: 15px;
+    color: white;
+    font-size: 13px;
+}
+
+.footer {
+    margin-top: 20px;
+    color: rgba(255,255,255,.7);
+    font-size: 11px;
+}
+
+.success {
+    display: none;
+    color: white;
+}
+
+.success h1 {
+    font-size: 30px;
+}
+
+#confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.shake {
+    animation: shake .4s;
+}
+
+@keyframes shake {
+    0%,100% {transform: translateX(0);}
+    25% {transform: translateX(-10px);}
+    75% {transform: translateX(10px);}
+}
+
+@media(max-width:420px) {
+    .login-card {
+        width: 90%;
+        padding: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+
+<canvas id="confetti"></canvas>
+
+<div class="login-card" id="card">
+
+    <div id="login">
+        <div class="mascot">🤖</div>
+
+        <div class="eyes">
+            <div class="eye"><div class="pupil"></div></div>
+            <div class="eye"><div class="pupil"></div></div>
+        </div>
+
+        <h1>Welcome Back!</h1>
+        <p class="subtitle">
+            Login first. Don't press random buttons 😂
+        </p>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Username 👤</label>
+                <input id="username" type="text"
+                    placeholder="Who are you?" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password 🔐</label>
+                <input id="password" type="password"
+                    placeholder="Your secret..." required>
+            </div>
+
+            <button type="submit" id="btn">
+                Let Me In 🚀
+            </button>
+        </form>
+
+        <div id="message">
+            Psst... even the robot is watching you.
+        </div>
+
+        <div class="footer">
+            © 2026 | Powered by questionable security 😂
+        </div>
+    </div>
+
+    <div class="success" id="success">
+        <div style="font-size:80px">🥳</div>
+        <h1>YOU DID IT!</h1>
+        <p style="margin:15px 0">
+            Welcome, Supreme Admin! 👑
+        </p>
+        <p>You have successfully unlocked absolutely nothing.</p>
+        <button onclick="location.reload()">
+            Logout 😂
+        </button>
+    </div>
+
+</div>
+
+<script>
+const username = document.getElementById("username");
+const password = document.getElementById("password");
+const message = document.getElementById("message");
+const card = document.getElementById("card");
+const pupils = document.querySelectorAll(".pupil");
+
+const jokes = [
+    "Wrong password! Even my grandma knows better 😂",
+    "Bro are you guessing or hacking? 💀",
+    "Access denied. Go drink some water 🥤",
+    "Nice try FBI agent 😂",
+    "The robot is disappointed in you 🤖",
+    "Password incorrect. Try using your brain 🧠"
+];
+
+let attempts = 0;
+
+// Eyes follow mouse
+document.addEventListener("mousemove", (e) => {
+    pupils.forEach(pupil => {
+        const rect = pupil.parentElement.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+
+        const angle = Math.atan2(y, x);
+        const distance = Math.min(Math.hypot(x,y), 8);
+
+        pupil.style.transform =
+            `translate(${Math.cos(angle)*distance}px,
+                       ${Math.sin(angle)*distance}px)`;
+    });
+});
+
+// Close eyes when typing password
+password.addEventListener("focus", () => {
+    document.querySelectorAll(".eye").forEach(eye => {
+        eye.style.height = "5px";
+        eye.style.marginTop = "15px";
+    });
+});
+
+password.addEventListener("blur", () => {
+    document.querySelectorAll(".eye").forEach(eye => {
+        eye.style.height = "35px";
+        eye.style.marginTop = "0";
+    });
+});
+
+// Login system
+document.getElementById("loginForm")
+.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    if (username.value === "admin" &&
+        password.value === "admin") {
+
+        message.textContent = "ACCESS GRANTED! 🎉";
+
+        document.getElementById("login").style.display = "none";
+        document.getElementById("success").style.display = "block";
+
+        launchConfetti();
+
+    } else {
+        attempts++;
+
+        message.textContent =
+            jokes[Math.floor(Math.random() * jokes.length)];
+
+        card.classList.remove("shake");
+        void card.offsetWidth;
+        card.classList.add("shake");
+
+        if (attempts >= 3) {
+            message.textContent =
+                "3 failed attempts! Bro, it's literally admin 😂";
+        }
+    }
+});
+
+// Confetti
+function launchConfetti() {
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = Array.from({length: 180}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * -canvas.height,
+        size: Math.random() * 8 + 3,
+        speed: Math.random() * 5 + 2,
+        color: `hsl(${Math.random()*360},100%,60%)`
+    }));
+
+    let frames = 0;
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        pieces.forEach(p => {
+            ctx.fillStyle = p.color;
+            ctx.fillRect(p.x, p.y, p.size, p.size);
+            p.y += p.speed;
+            p.x += Math.sin(p.y / 20);
+        });
+
+        frames++;
+
+        if (frames < 250) {
+            requestAnimationFrame(animate);
+        }
+    }
+
+    animate();
+}
+</script>
+
+</body>
+</html>
